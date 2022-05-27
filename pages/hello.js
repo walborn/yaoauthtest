@@ -9,11 +9,13 @@ const clientSecret = '5ba51ba2dcae47adb14ff38e56645f39'; // Пароль при�
 export default function Home() {
   const router = useRouter()
   const [value, setValue] = React.useState({})
-  const [ code, setCode ] = React.useState(0)
+  const [ code, setCode ] = React.useState('')
   
   React.useEffect(() => {
     if (router.search?.startsWith('?code='))
       setCode(router.search.slice(6))
+    if (location?.search?.startsWith('?code='))
+      setCode(location.search.slice(6))
   }, [ router ])
 
   const handleClick = () => {
