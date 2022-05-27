@@ -9,32 +9,15 @@ const clientSecret = '5ba51ba2dcae47adb14ff38e56645f39'; // Пароль при�
 export default function Home() {
   const router = useRouter()
   const [value, setValue] = React.useState({})
+  const [ code, setCode ] = React.useState(0)
   
   React.useEffect(() => {
-    if (router.search?.startsWith('?code=')) {
-      const code = router.search.slice(6)
-      axios.post(`https://oauth.yandex.ru/token`,
-      {
-        grant_type: 'authorization_code',
-        code,
-        // client_id: clientId,
-        // client_secret: clientSecret,
-      },
-      {
-        headers: {
-          'Content-type': 'application/x-www-form-urlencoded',
-          Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
-        }
-      })
-        .then(setValue)
-        .catch(setValue)
-        .finally(alert)
-      console.log(code)
-    } 
+    if (router.search?.startsWith('?code='))
+      setCode(router.search.slice(6))
   }, [ router ])
 
   const handleClick = () => {
-    const code = router.search.slice(6)
+    console.log(111, code)
     axios.post(`https://oauth.yandex.ru/token`,
     {
       grant_type: 'authorization_code',
@@ -51,7 +34,6 @@ export default function Home() {
       .then(setValue)
       .catch(setValue)
       .finally(alert)
-    console.log(code)
   } 
 
   return (
