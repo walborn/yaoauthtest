@@ -10,7 +10,7 @@ export default function Home() {
   const router = useRouter()
   return (
     <div>
-      <a href={`https://oauth.yandex.ru/authorize?response_type=code&client_id=${clientId}&redirect_uri=${router?.basePath}/hello`}>
+      <a href={`https://oauth.yandex.ru/authorize?response_type=code&client_id=${clientId}&redirect_uri=https://yaoauthtest-nemsvtcr5-walborn.vercel.app/hello`}>
         Авторизация через Яндекс
       </a>
     </div>
