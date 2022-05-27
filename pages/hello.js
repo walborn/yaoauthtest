@@ -31,9 +31,7 @@ export default function Home() {
   }, [ router ])
   return (
     <div>
-      <a href={`https://oauth.yandex.ru/authorize?response_type=code&client_id=${clientId}&redirect_uri=${location.pathname}`}>
-        Авторизация через Яндекс
-      </a>
+      asdfdsf
     </div>
   )
 }
