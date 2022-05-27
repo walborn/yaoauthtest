@@ -32,9 +32,32 @@ export default function Home() {
       console.log(code)
     } 
   }, [ router ])
+
+  const handleClick = () => {
+    const code = router.search.slice(6)
+    axios.post(`https://oauth.yandex.ru/token`,
+    {
+      grant_type: 'authorization_code',
+      code,
+      // client_id: clientId,
+      // client_secret: clientSecret,
+    },
+    {
+      headers: {
+        'Content-type': 'application/x-www-form-urlencoded',
+        Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
+      }
+    })
+      .then(setValue)
+      .catch(setValue)
+      .finally(alert)
+    console.log(code)
+  } 
+
   return (
     <div>
       <pre>{JSON.stringify(value, null, 2)}</pre>
+      <button onClick={handleClick}>click me</button>
     </div>
   )
 }
