@@ -25,7 +25,10 @@ export default function Home() {
           'Content-type': 'application/x-www-form-urlencoded',
           Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
         }
-      }).then(setValue)
+      })
+        .then(setValue)
+        .catch(setValue)
+        .finally(alert)
       console.log(code)
     } 
   }, [ router ])
