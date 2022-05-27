@@ -1,8 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import { useRouter } from 'next/router'
 
 const clientId = 'a6f2398bd4c64495b59d50b7ffb745b7'; // ID приложения
 const clientSecret = '5ba51ba2dcae47adb14ff38e56645f39'; // Пароль приложения
@@ -10,9 +8,11 @@ const redirectUri  = 'http://localhost:3000'; // Адрес, на который
 
 
 export default function Home() {
+  const router = useRouter()
+  
   React.useEffect(() => {
-    if (location.search?.startsWith('?code=')) {
-      const code = location.search.slice(6)
+    if (router.search?.startsWith('?code=')) {
+      const code = router.search.slice(6)
       axios.post(`https://oauth.yandex.ru/token`,
       {
         grant_type: 'authorization_code',
@@ -28,7 +28,7 @@ export default function Home() {
       }).then(console.log)
       console.log(code)
     } 
-  }, [ ])
+  }, [ router ])
   return (
     <div>
       <a href={`https://oauth.yandex.ru/authorize?response_type=code&client_id=${clientId}&redirect_uri=${location.pathname}`}>
