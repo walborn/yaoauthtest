@@ -4,11 +4,11 @@ import { useRouter } from 'next/router'
 
 const clientId = 'a6f2398bd4c64495b59d50b7ffb745b7'; // ID приложения
 const clientSecret = '5ba51ba2dcae47adb14ff38e56645f39'; // Пароль приложения
-const redirectUri  = 'http://localhost:3000'; // Адрес, на который будет переадресован пользователь после прохождения авторизации
 
 
 export default function Home() {
   const router = useRouter()
+  const [value, setValue] = React.useState({})
   
   React.useEffect(() => {
     if (router.search?.startsWith('?code=')) {
@@ -25,13 +25,13 @@ export default function Home() {
           'Content-type': 'application/x-www-form-urlencoded',
           Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
         }
-      }).then(console.log)
+      }).then(setValue)
       console.log(code)
     } 
   }, [ router ])
   return (
     <div>
-      asdfdsf
+      <pre>{JSON.stringify(value, null, 2)}</pre>
     </div>
   )
 }
